@@ -299,20 +299,20 @@ class HumanizedFormatter(DefaultFormatter):
 class PorcelainFormatter(DefaultFormatter):
     def _todo_as_dict(self, todo: Todo) -> dict:
         return {
+            "categories": todo.categories,
             "completed": todo.is_completed,
-            "start": self.format_datetime(todo.start),
+            "completed_at": self.format_datetime(todo.completed_at),
+            "description": todo.description,
             "due": self.format_datetime(todo.due),
             "id": todo.id,
             "list": todo.list.name if todo.list else None,
             "list_colour": todo.list.colour if todo.list else None,
-            "percent": todo.percent_complete,
-            "summary": todo.summary,
-            "categories": todo.categories,
-            "priority": todo.priority,
             "location": todo.location,
-            "description": todo.description,
-            "completed_at": self.format_datetime(todo.completed_at),
+            "percent": todo.percent_complete,
+            "priority": todo.priority,
             "recurring": todo.is_recurring,
+            "start": self.format_datetime(todo.start),
+            "summary": todo.summary,
         }
 
     def compact(self, todo: Todo) -> str:
